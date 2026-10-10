@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELLBENDER DIGITAL // Technical Solutions</title>
+  <meta name="description" content="Hellbender Digital — Technical solutions, digital infrastructure, and hands-on web systems engineering based in Roanoke, VA.">
+  <meta property="og:title" content="HELLBENDER DIGITAL // Technical Solutions">
+  <meta property="og:description" content="Technical solutions, digital infrastructure, and hands-on web systems engineering based in Roanoke, VA.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.hellbenderdigital.com">
+  <meta property="og:image" content="salamander-transparent.png">
+  <link rel="icon" type="image/png" href="salamander-transparent.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cream: #ebe4d5;
+      --bg-cream-dark: #dfd7c5;
+      --c-dark: #0e1113;
+      --c-slate: #1a1714;
+      --c-orange: #e06e01;
+      --c-orange-hover: #c75e00;
+      --c-muted: #6e6456;
+      --c-border: #d4caa8;
+      --card-bg: #f5f0e6;
+      --font-display: 'Oswald', sans-serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--c-slate);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle print-grain background overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.025;
+      pointer-events: none;
+      background-image: radial-gradient(#000 1px, transparent 1px);
+      background-size: 16px 16px;
+      z-index: 100;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Top Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1.5px solid var(--c-border);
+      margin-bottom: 48px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+    }
+    .brand-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--c-orange);
+      flex-shrink: 0;
+    }
+
+    .location-tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .avatar-wrapper {
+      width: 240px;
+      height: 240px;
+      background-color: var(--c-dark);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .avatar-wrapper:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.2);
+    }
+    .avatar-wrapper img {
+      width: 72%;
+      height: auto;
+      image-rendering: pixelated;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .main-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+      font-weight: 700;
+      line-height: 0.94;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--c-slate);
+    }
+
+    .sub-title {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-orange);
+    }
+
+    .lead-text {
+      font-size: 1.05rem;
+      color: #3b352e;
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    /* Actions row */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--c-dark);
+      color: #ffffff;
+      border: 1px solid var(--c-dark);
+    }
+    .btn-primary:hover {
+      background-color: #23282c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .btn-orange {
+      background-color: var(--c-orange);
+      color: #ffffff;
+      border: 1px solid var(--c-orange);
+    }
+    .btn-orange:hover {
+      background-color: var(--c-orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(224, 110, 1, 0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--c-slate);
+      border: 1.5px solid var(--c-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--c-dark);
+      background-color: rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    /* Capabilities Grid */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--c-border);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .feature-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--c-border);
+      border-radius: 16px;
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: #b5a995;
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--c-orange);
+      font-weight: 700;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--c-slate);
+      line-height: 1.1;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: #4a433a;
+      line-height: 1.55;
+    }
+
+    /* Contact Table */
+    .contact-panel {
+      background-color: var(--card-bg);
+      border: 1.5px solid var(--c-border);
+      border-radius: 20px;
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .contact-info p {
+      color: #5a5349;
+      font-size: 0.95rem;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .meta-k {
+      color: var(--c-muted);
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    .meta-v a {
+      color: var(--c-slate);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px dotted #999;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .meta-v a:hover {
+      color: var(--c-orange);
+      border-color: var(--c-orange);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1.5px solid var(--c-border);
+      padding: 24px 0 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer a {
+      color: var(--c-slate);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    footer a:hover {
+      color: var(--c-orange);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 28px;
+      }
+      .avatar-wrapper {
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+      }
+      .hero-content {
+        align-items: center;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .contact-panel {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        text-align: center;
+      }
+      .meta-item {
+        justify-content: center;
+      }
+      header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand-badge">HELLBENDER DIGITAL</div>
+      <div class="location-tag">base: Roanoke, Virginia</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="avatar-wrapper">
+        <img src="salamander-transparent.png" alt="Hellbender Salamander">
+      </div>
+      <div class="hero-content">
+        <div class="sub-title">Technical Solutions</div>
+        <h1 class="main-title">Jason<br>Persinger</h1>
+        <p class="lead-text">
+          Direct, hands-on engineering for systems that matter. Specializing in systems architecture, technical troubleshooting, web integration, and custom digital infrastructure.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-orange" href="mailto:jason@hellbenderdigital.com">
+            <span>✉️ Email Me</span>
+          </a>
+          <a class="btn btn-primary" href="tel:5403948222">
+            <span>📞 (540) 394-8222</span>
+          </a>
+          <a class="btn btn-outline" href="contact.vcf" download>
+            <span>📇 Save vCard</span>
+          </a>
+          <a class="btn btn-outline" href="https://jasonpersinger.me" target="_blank" rel="noopener">
+            <span>Portfolio &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section>
+      <div class="section-label">Core Capabilities</div>
+      <div class="cards-grid">
+        <div class="feature-card">
+          <span class="card-num">01 //</span>
+          <h2 class="card-title">Systems & Infra</h2>
+          <p class="card-desc">
+            Linux architecture, server administration, automated deployment pipelines, and hardware/embedded systems integration.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="card-num">02 //</span>
+          <h2 class="card-title">Web & Integration</h2>
+          <p class="card-desc">
+            Full-stack web applications, custom API pipelines, database synchronization, and scalable cloud services.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="card-num">03 //</span>
+          <h2 class="card-title">Troubleshooting</h2>
+          <p class="card-desc">
+            Deep root-cause triage, system rescue, latency optimization, and untangling complex technical bottlenecks.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Direct Connections -->
+    <section class="contact-panel">
+      <div class="contact-info">
+        <h3>Direct Line</h3>
+        <p>
+          Available for contract solutions, infrastructure consulting, and specialized engineering projects.
+        </p>
+      </div>
+
+      <div class="meta-list">
+        <div class="meta-item">
+          <span class="meta-k">Email</span>
+          <span class="meta-v"><a href="mailto:jason@hellbenderdigital.com">jason@hellbenderdigital.com</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-k">Phone</span>
+          <span class="meta-v"><a href="tel:5403948222">(540) 394-8222</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-k">Web</span>
+          <span class="meta-v"><a href="https://www.hellbenderdigital.com">www.hellbenderdigital.com</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-k">Card</span>
+          <span class="meta-v"><a href="https://jasonpersinger.me/card.html" target="_blank">View 3D Business Card &rarr;</a></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>&copy; 2026 Hellbender Digital. All rights reserved.</div>
+      <div>Roanoke, Virginia // <a href="https://jasonpersinger.me" target="_blank">jasonpersinger.me</a></div>
+    </footer>
+  </div>
+
+</body>
+</html>

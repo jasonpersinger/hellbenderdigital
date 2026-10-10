@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Persinger;Jason;;;
+FN:Jason Persinger
+ORG:Hellbender Digital
+TITLE:Technical Solutions
+TEL;TYPE=CELL,VOICE:(540) 394-8222
+EMAIL;TYPE=INTERNET,WORK:jason@hellbenderdigital.com
+URL;TYPE=WORK:https://www.hellbenderdigital.com
+ADR;TYPE=WORK:;;Roanoke;VA;;USA
+NOTE:Technical Solutions, Web Systems & Digital Infrastructure
+END:VCARD
